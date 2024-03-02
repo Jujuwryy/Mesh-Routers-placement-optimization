@@ -37,10 +37,6 @@ The firefly algorithm optimizes router placement through the following steps:
 
 The Euclidean distance formula is a fundamental concept in mathematics, used to measure the distance between two points in a two-dimensional space. In the context of this router optimization problem and the firefly algorithm, the Euclidean distance formula is utilized to calculate the distance between two router configurations (fireflies).
 
-The Euclidean distance between two points \( P(x_1, y_1) \) and \( Q(x_2, y_2) \) in a two-dimensional Cartesian coordinate system is given by:
-
-\[ d(P, Q) = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \]
-
 In the context of the firefly algorithm for router optimization:
 
 - \( P \) and \( Q \) represent two router configurations (fireflies).
