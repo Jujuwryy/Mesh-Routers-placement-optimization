@@ -1,53 +1,81 @@
-Router Optimization using Firefly Algorithm
+# Router Optimization using Firefly Algorithm
 
-This repository contains Python code that implements a firefly algorithm for optimizing router placement in wireless networks. The algorithm aims to maximize both coverage and connectivity by iteratively adjusting router positions.
+This repository contains Python code that implements the **Firefly Algorithm** for optimizing router placement in wireless networks. The algorithm aims to maximize both **coverage** and **connectivity** by iteratively adjusting the positions of routers.
 
-## Formulas and Variables
+## Key Concepts
 
-### Formulas
+### Coverage
+The coverage of a router configuration is determined by the number of clients within the router's coverage radius.
 
-- **Coverage**: The coverage of a router configuration is calculated based on the number of clients covered by the routers within the coverage radius.
-- **Connectivity**: The connectivity is determined by the number of clients that are connected to the network through the routers' coverage.
-- **Fitness**: The fitness function combines coverage and connectivity to evaluate the quality of a router configuration.
+### Connectivity
+Connectivity is defined as the number of clients that are connected to the network through the routers' coverage.
 
-### Variables
+### Fitness
+The fitness function combines coverage and connectivity to evaluate the quality of a router configuration.
+
+## Variables
 
 - `num_clients`: Number of clients in the network.
 - `num_routers`: Number of routers to be placed.
 - `coverage_radius`: Radius of router coverage in network units.
-- `area_size`: Width and Height of the area in network units.
+- `area_size`: Width and height of the area in network units.
 - `max_iter`: Maximum number of iterations for the optimization process.
 - `num_fireflies`: Number of fireflies (population size).
 - `alpha`: Randomness strength parameter.
 - `beta_0`: Attraction coefficient base.
-- `gamma`: Absorption coefficient (affects the balance between coverage and connectivity).
+- `gamma`: Absorption coefficient, affecting the balance between coverage and connectivity.
 
-## Algorithm
+## Firefly Algorithm Overview
 
 The firefly algorithm optimizes router placement through the following steps:
 
-1. Initialize fireflies (router positions) randomly.
-2. Calculate coverage and connectivity for each firefly.
-3. Evaluate fitness for each firefly using the coverage, connectivity, and user-defined parameters.
-4. Move fireflies towards brighter (i.e., better) fireflies based on their fitness.
-5. Iterate through multiple generations, adjusting parameters like alpha and beta_0.
-6. Terminate when the maximum number of iterations is reached or a convergence criterion is met.
+1. **Initialization**: Randomly place fireflies (routers) in the area.
+2. **Coverage & Connectivity Calculation**: Calculate the coverage and connectivity for each firefly.
+3. **Fitness Evaluation**: Evaluate each firefly's fitness using the coverage, connectivity, and user-defined parameters.
+4. **Movement**: Fireflies move toward brighter (better) fireflies based on their fitness.
+5. **Iteration**: Repeat the process for multiple generations, adjusting parameters like `alpha` and `beta_0`.
+6. **Termination**: The algorithm stops once the maximum number of iterations is reached or a convergence criterion is met.
 
 ## Euclidean Distance Formula
 
-The Euclidean distance formula is a fundamental concept in mathematics, used to measure the distance between two points in a two-dimensional space. In the context of this router optimization problem and the firefly algorithm, the Euclidean distance formula is utilized to calculate the distance between two router configurations (fireflies).
+The Euclidean distance formula is used to measure the distance between two router configurations (fireflies). The formula is:
 
-In the context of the firefly algorithm for router optimization:
+\[
+d(P, Q) = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}
+\]
 
-- \( P \) and \( Q \) represent two router configurations (fireflies).
-- \( (x_1, y_1) \) and \( (x_2, y_2) \) are the positions of the routers in the configurations.
+Where:
+- \(P\) and \(Q\) are two router configurations (fireflies).
+- \((x_1, y_1)\) and \((x_2, y_2)\) are the positions of the routers.
 
-By calculating the Euclidean distance between two router configurations, the algorithm can determine how "close" or "far" they are from each other in the solution space. This information is then used to guide the movement of fireflies towards more favorable configurations during the optimization process.
+This distance is used to guide the movement of fireflies toward better solutions during optimization.
 
-In the code, the Euclidean distance formula is applied to calculate the distance between the centroids of two fireflies using their router positions. This distance is crucial for determining the attraction between fireflies, influencing their movement towards better configurations.
+## Plotting Coverage
 
+The algorithm visualizes the optimized router placements using **Matplotlib**. The plot displays:
 
-## Plot Graph with Coverage
+- **Client Positions**: Blue dots indicating the locations of clients.
+- **Router Positions**: Red stars indicating the optimized positions of the routers.
+- **Coverage Radius**: Green circles representing the coverage area of each router.
 
-The code visualizes the optimal router positions with coverage radius using Matplotlib. The plot displays the client positions (blue dots), optimal router positions (red stars), and coverage radius of each router (green circles).
+### Example Output
 
+After running the algorithm, the plot will display:
+
+- **Blue dots**: Client positions in the network area.
+- **Red stars**: Final optimized router positions.
+- **Green circles**: Coverage radius for each router, illustrating the area covered by each router.
+
+This helps to visualize the success of the algorithm in maximizing coverage and connectivity.
+
+## Requirements
+
+- Python 3.x
+- Libraries:
+  - `numpy`
+  - `matplotlib`
+
+You can install the required libraries using `pip`:
+
+```bash
+pip install numpy matplotlib
