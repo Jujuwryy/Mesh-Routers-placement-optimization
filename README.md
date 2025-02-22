@@ -81,4 +81,5 @@ The optimization process uses the following key methods:
 
 *Figure: Visualization of optimized router placement showing clients (blue dots), routers (red stars), and coverage areas (green circles)*
 The visualization module uses Matplotlib to create clear, informative plots of the network configuration.
-![Sample output](<img width="1436" alt="Router" src="https://github.com/user-attachments/assets/1576dda6-5b38-474b-ba99-f2f22f09c43a" />)
+
+<img width="1436" alt="Router" src="https://github.com/user-attachments/assets/5ccee803-6981-4f4b-a134-f9e50466f12e" />
