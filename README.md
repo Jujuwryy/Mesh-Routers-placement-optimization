@@ -1,81 +1,84 @@
 # Router Optimization using Firefly Algorithm
 
-This repository contains Python code that implements the **Firefly Algorithm** for optimizing router placement in wireless networks. The algorithm aims to maximize both **coverage** and **connectivity** by iteratively adjusting the positions of routers.
+This repository implements a firefly algorithm to optimize router placement in wireless networks. The algorithm maximizes coverage and connectivity by iteratively adjusting router positions based on a bio-inspired optimization approach.
 
-## Key Concepts
+## Core Components
 
-### Coverage
-The coverage of a router configuration is determined by the number of clients within the router's coverage radius.
+### Optimization Parameters
+- Number of clients
+- Number of routers
+- Coverage radius
+- Area dimensions
+- Maximum iterations
+- Population size (number of fireflies)
+- Algorithm coefficients (α, β₀, γ)
 
-### Connectivity
-Connectivity is defined as the number of clients that are connected to the network through the routers' coverage.
+### Key Metrics
+- **Coverage**: Percentage of clients within router range
+- **Connectivity**: Number of clients connected to the network
+- **Fitness**: Combined metric of coverage and connectivity quality
 
-### Fitness
-The fitness function combines coverage and connectivity to evaluate the quality of a router configuration.
+## Algorithm Overview
 
-## Variables
+1. **Initialization**: Random placement of router positions
+2. **Evaluation**: Calculate coverage and connectivity metrics
+3. **Optimization**: Iterative improvement through firefly movement
+4. **Movement**: Routers (fireflies) move toward better configurations
+5. **Convergence**: Process continues until reaching stop criteria
 
-- `num_clients`: Number of clients in the network.
-- `num_routers`: Number of routers to be placed.
-- `coverage_radius`: Radius of router coverage in network units.
-- `area_size`: Width and height of the area in network units.
-- `max_iter`: Maximum number of iterations for the optimization process.
-- `num_fireflies`: Number of fireflies (population size).
-- `alpha`: Randomness strength parameter.
-- `beta_0`: Attraction coefficient base.
-- `gamma`: Absorption coefficient, affecting the balance between coverage and connectivity.
+## Distance Calculation
 
-## Firefly Algorithm Overview
+The algorithm uses Euclidean distance to measure configuration similarity:
 
-The firefly algorithm optimizes router placement through the following steps:
-
-1. **Initialization**: Randomly place fireflies (routers) in the area.
-2. **Coverage & Connectivity Calculation**: Calculate the coverage and connectivity for each firefly.
-3. **Fitness Evaluation**: Evaluate each firefly's fitness using the coverage, connectivity, and user-defined parameters.
-4. **Movement**: Fireflies move toward brighter (better) fireflies based on their fitness.
-5. **Iteration**: Repeat the process for multiple generations, adjusting parameters like `alpha` and `beta_0`.
-6. **Termination**: The algorithm stops once the maximum number of iterations is reached or a convergence criterion is met.
-
-## Euclidean Distance Formula
-
-The Euclidean distance formula is used to measure the distance between two router configurations (fireflies). The formula is:
-
-\[
-d(P, Q) = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}
-\]
+```python
+distance = sqrt((x₂ - x₁)² + (y₂ - y₁)²)
+```
 
 Where:
-- \(P\) and \(Q\) are two router configurations (fireflies).
-- \((x_1, y_1)\) and \((x_2, y_2)\) are the positions of the routers.
+- (x₁, y₁): Position of first router
+- (x₂, y₂): Position of second router
 
-This distance is used to guide the movement of fireflies toward better solutions during optimization.
+## Visualization
 
-## Plotting Coverage
+The output plot shows:
+- Client locations (blue dots)
+- Optimal router positions (red stars)
+- Coverage areas (green circles)
 
-The algorithm visualizes the optimized router placements using **Matplotlib**. The plot displays:
+## Usage
 
-- **Client Positions**: Blue dots indicating the locations of clients.
-- **Router Positions**: Red stars indicating the optimized positions of the routers.
-- **Coverage Radius**: Green circles representing the coverage area of each router.
+```python
+# Initialize optimizer
+optimizer = RouterOptimizer(
+    num_clients=50,
+    num_routers=15,
+    coverage_radius=200,
+    area_size=2000
+)
 
-### Example Output
+# Run optimization
+best_positions = optimizer.optimize()
 
-After running the algorithm, the plot will display:
+# Visualize results
+optimizer.plot_results()
+```
 
-- **Blue dots**: Client positions in the network area.
-- **Red stars**: Final optimized router positions.
-- **Green circles**: Coverage radius for each router, illustrating the area covered by each router.
+## Implementation Details
 
-This helps to visualize the success of the algorithm in maximizing coverage and connectivity.
+The optimization process uses the following key methods:
 
-## Requirements
+1. **Firefly Movement**:
+   - Brighter fireflies attract others
+   - Movement influenced by distance and attractiveness
 
-- Python 3.x
-- Libraries:
-  - `numpy`
-  - `matplotlib`
+2. **Fitness Calculation**:
+   - Combines coverage and connectivity scores
+   - Weighted by user-defined parameters
 
-You can install the required libraries using `pip`:
+3. **Coverage Assessment**:
+   - Checks client coverage within radius
+   - Evaluates network connectivity
 
-```bash
-pip install numpy matplotlib
+![Sample Output](Router.png)
+*Figure: Visualization of optimized router placement showing clients (blue dots), routers (red stars), and coverage areas (green circles)*
+The visualization module uses Matplotlib to create clear, informative plots of the network configuration.
